@@ -1,0 +1,60 @@
+2020-04-17T13:26:28 - INFO - starting script
+2020-04-17T13:26:28 - INFO - current and target PS version are the same, no action is required
+2020-04-17T13:26:28 - INFO - clearing auto logon registry properties
+2020-04-17T13:34:52 - INFO - starting script
+2020-04-17T13:34:52 - INFO - current and target PS version are the same, no action is required
+2020-04-17T13:34:52 - INFO - clearing auto logon registry properties
+2020-04-17T13:35:56 - INFO - starting script
+2020-04-17T13:35:56 - INFO - current and target PS version are the same, no action is required
+2020-04-17T13:35:56 - INFO - clearing auto logon registry properties
+2020-04-17T13:46:29 - INFO - starting script
+2020-04-17T13:46:29 - INFO - current and target PS version are the same, no action is required
+2020-04-17T13:46:30 - INFO - clearing auto logon registry properties
+2020-04-17T13:47:51 - INFO - starting script
+2020-04-17T13:47:51 - INFO - current and target PS version are the same, no action is required
+2020-04-17T13:47:51 - INFO - clearing auto logon registry properties
+2020-04-17T13:48:24 - INFO - starting script
+2020-04-17T13:48:24 - INFO - current and target PS version are the same, no action is required
+2020-04-17T13:48:24 - INFO - clearing auto logon registry properties
+2020-04-17T13:49:04 - INFO - starting script
+2020-04-17T13:49:04 - INFO - current and target PS version are the same, no action is required
+2020-04-17T13:49:04 - INFO - clearing auto logon registry properties
+2020-04-17T14:28:03 - INFO - starting script
+2020-04-17T14:28:03 - INFO - current and target PS version are the same, no action is required
+2020-04-17T14:28:03 - INFO - clearing auto logon registry properties
+2020-04-18T09:08:29 - INFO - starting script
+2020-04-18T09:08:29 - INFO - current and target PS version are the same, no action is required
+2020-04-18T09:08:29 - INFO - clearing auto logon registry properties
+2020-04-23T18:08:57 - INFO - starting script
+2020-04-23T18:08:57 - INFO - current and target PS version are the same, no action is required
+2020-04-23T18:08:57 - INFO - clearing auto logon registry properties
+2020-06-30T11:44:48 - INFO - starting script
+2020-06-30T11:44:48 - INFO - current and target PS version are the same, no action is required
+2020-06-30T11:44:48 - INFO - clearing auto logon registry properties
+2020-06-30T11:52:05 - INFO - starting script
+2020-06-30T11:52:05 - INFO - current and target PS version are the same, no action is required
+2020-06-30T11:52:05 - INFO - clearing auto logon registry properties
+2020-07-01T07:56:58 - INFO - starting script
+2020-07-01T07:56:58 - INFO - The following actions will be performed: 5.1
+2020-07-01T07:56:58 - INFO - running powershell update to version 5.1
+2020-07-01T07:56:58 - INFO - starting new process 'C:\configure_windows_remoting_offline\installers\Win8.1AndW2K12R2-KB3191564-x64.msu /quiet /norestart'
+2020-07-01T07:56:59 - INFO - process completed with exit code '-2145124329'
+2020-07-01T07:56:59 - ERROR - : exit code -2145124329
+2020-07-01T08:06:39 - INFO - starting script
+2020-07-01T08:06:40 - INFO - The following actions will be performed: 5.1
+2020-07-01T08:06:40 - INFO - running powershell update to version 5.1
+2020-07-01T08:06:40 - INFO - starting new process 'C:\configure_windows_remoting_offline\installers\Win8.1AndW2K12R2-KB3191564-x64.msu /quiet /norestart'
+2020-07-01T08:06:46 - INFO - process completed with exit code '-2145124329'
+2020-07-01T08:06:46 - ERROR - : exit code -2145124329
+2020-07-01T08:09:28 - INFO - starting script
+2020-07-01T08:09:28 - INFO - The following actions will be performed: 5.1
+2020-07-01T08:09:28 - INFO - running powershell update to version 5.1
+2020-07-01T08:09:29 - INFO - starting new process 'C:\configure_windows_remoting_offline\installers\Win8.1AndW2K12R2-KB3191564-x64.msu /quiet /norestart'
+2020-07-01T08:09:35 - INFO - process completed with exit code '-2145124329'
+2020-07-01T08:09:35 - ERROR - : exit code -2145124329
+2020-07-01T08:15:50 - INFO - starting script
+2020-07-01T08:15:51 - INFO - The following actions will be performed: 5.1
+2020-07-01T08:15:51 - INFO - running powershell update to version 5.1
+2020-07-01T08:15:51 - INFO - starting new process 'C:\configure_windows_remoting_offline\installers\Win8.1AndW2K12R2-KB3191564-x64.msu /quiet /norestart'
+2020-07-01T08:15:57 - INFO - process completed with exit code '-2145124329'
+2020-07-01T08:15:57 - ERROR - : exit code -2145124329
