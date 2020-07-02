@@ -1,26 +1,12 @@
 ﻿Param(
     [bool]$Local = $false,
-    [string]$username,
-    [string]$password
+    [string]$username = "Administrator",
+    [string]$password = "password"
 )
 
 Function Upgrade-Powershell($username, $password) {
-    echo "adding script to run on next logon"
-    #$script_path = $script:MyInvocation.MyCommand.Path
-    $script_path = "C:\configure_windows_remoting_offline\Upgrade-PowerShell.ps1"
-    $ps_path = "$env:SystemDrive\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
-    $arguments = "-version 5.1"
-    if ($username -and $password) {
-        $arguments = "$arguments -username `"$username`" -password `"$password`" -tmp_dir `"C:\configure_windows_remoting_offline`""
-    }
-    if ($verbose) {
-        $arguments = "$arguments -Verbose"
-    }
 
-    $command = "$ps_path -ExecutionPolicy ByPass -File $script_path $arguments"
-    $reg_key = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce"
-    $reg_property_name = "ps-upgrade"
-    Set-ItemProperty -Path $reg_key -Name $reg_property_name -Value $command
+    Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" -Name "psupdate" -Value '"C:\configure_windows_remoting_offline\update.bat"'
 
     if ($username -and $password) {
         $reg_winlogon_path = "HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Winlogon"
@@ -54,12 +40,10 @@ if($psversion.Version.Major -ne 5) {
 
     echo "Upgrade required!"
 
-    if($Local -ne $true) {
         # Map Network Drive to files on backup server
-        net use Z: \\192.168.1.55\configure_windows_remoting_offline /user:Administrator 'password'
+        net use Z: \\192.168.1.26\configure_windows_remoting_offline /user:Administrator password
         copy-item -Path "Z:\" -Destination "C:\configure_windows_remoting_offline" -Recurse -Verbose -Force
         net use Z: /delete
-    }
 
     # Call function to trigger update
     Upgrade-Powershell $username $password

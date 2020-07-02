@@ -83,10 +83,10 @@
 
 Param(
     [string]$version = "5.1",
-    [string]$username,
-    [string]$password,
+    [string]$username = "Administrator",
+    [string]$password = "password",
     [switch]$verbose = $true,
-    [string]$tmp_dir = "Z:\configure_windows_remoting_offline"
+    [string]$tmp_dir = "C:\configure_windows_remoting_offline"
 )
 $ErrorActionPreference = 'Stop'
 if ($verbose) {
@@ -108,23 +108,11 @@ Function Write-Log($message, $level="INFO") {
     Add-Content -Path $log_file -Value $log_entry
 }
 
-Function Reboot-AndResume {
-    Write-Log -message "adding script to run on next logon"
-    #$script_path = $script:MyInvocation.MyCommand.Path
-    $script_path = "$tmp_dir\prepare_windows.ps1"
-    $ps_path = "$env:SystemDrive\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
-    $arguments = "-version $version"
-    if ($username -and $password) {
-        $arguments = "$arguments -username `"$username`" -password `"$password`""
-    }
-    if ($verbose) {
-        $arguments = "$arguments -Verbose"
-    }
-
-    $command = "$ps_path -ExecutionPolicy ByPass -File $script_path $arguments"
-    $reg_key = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce"
-    $reg_property_name = "ps-upgrade"
-    Set-ItemProperty -Path $reg_key -Name $reg_property_name -Value $command
+Function Reboot-AndResume ($username, $password) {
+    
+    Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" -Name "psupdate" -Value '"C:\configure_windows_remoting_offline\update.bat"'
+    Write-Log -message "Added task to RunOnce"
+    echo "Added task to RunOnce"
 
     if ($username -and $password) {
         $reg_winlogon_path = "HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Winlogon"
@@ -181,6 +169,7 @@ Function Clear-AutoLogon {
     Set-ItemProperty -Path $reg_winlogon_path -Name AutoAdminLogon -Value 0
     Remove-ItemProperty -Path $reg_winlogon_path -Name DefaultUserName -ErrorAction SilentlyContinue
     Remove-ItemProperty -Path $reg_winlogon_path -Name DefaultPassword -ErrorAction SilentlyContinue
+    shutdown /r /t 0
 }
 
 Function Download-Wmf5Server2008($architecture) {
@@ -215,7 +204,7 @@ if ($PSVersionTable -eq $null) {
         Write-Log -message $error_msg -level "ERROR"
         throw $error_msg
     }
-    Reboot-AndResume
+    Reboot-AndResume $username $password
 }
 
 # exit if the target version is the same as the actual version
@@ -223,7 +212,7 @@ $current_ps_version = [version]"$($PSVersionTable.PSVersion.Major).$($PSVersionT
 if ($current_ps_version -eq [version]$version) {
     Write-Log -message "current and target PS version are the same, no action is required"
     Clear-AutoLogon
-    exit 0
+    shutdown /r /t 0
 }
 
 $os_version = [Version](Get-Item -Path "$env:SystemRoot\System32\kernel32.dll").VersionInfo.ProductVersion
@@ -375,11 +364,7 @@ foreach ($action in $actions) {
         throw $log_msg
     }
     if ($exit_code -eq 3010) {
-        #Reboot-AndResume
-        #$wshell = New-Object -ComObject Wscript.Shell
-        #$Output = $wshell.Popup("Powershell has been updated to version 5.1",0,"Update Complete")
-        Clear-AutoLogon
-        shutdown /r /t 0
+        Reboot-AndResume $username $password
         break
     }
 }
